@@ -1,12 +1,14 @@
 
-import { type HandlerError, handleAuth, handleCallback, handleLogin } from '@auth0/nextjs-auth0';
-import { NextRequest, NextResponse } from 'next/server';
+import  { HandlerError, handleAuth, handleCallback, handleLogin, AppRouteHandlerFnContext, AccessTokenRequest } from '@auth0/nextjs-auth0';
+import type { NextRequest, NextResponse } from 'next/server';
 import { getAccessToken } from "@auth0/nextjs-auth0";
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
 import axios from 'axios';
-import { type NextApiRequest } from 'next';
+import type { NextApiResponse, NextApiRequest } from 'next';
+import type { IncomingMessage, ServerResponse } from 'http';
 
-const apiServerUrl = process.env.API_SERVER_URL as string;
+
+const apiServerUrl = process.env.API_SERVER_URL;
 
 export default handleAuth({
   onError (req, res, error){
@@ -17,8 +19,8 @@ export default handleAuth({
     });
     res.end();
   },
-  // async login(req, res) { ** might be beter
-  login: async (req: NextRequest, res: NextResponse) => {
+
+  login : async (req: NextApiRequest, res: NextApiResponse)=>{
     try {
       await handleLogin(req, res, {
         authorizationParams: { 
@@ -33,10 +35,9 @@ export default handleAuth({
       console.error(error);
     }
   },
-  callback: async (req, res) => {
+  callback: async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       await handleCallback(req, res)
-      console.log("does this work?")
       const { accessToken } = await getAccessToken(req, res);
       console.log(accessToken)
       const config: AxiosRequestConfig = {
@@ -50,7 +51,7 @@ export default handleAuth({
       await axios(config);
     } catch (error) {
       console.log(error)
-      res.status(error.status || 500).end(error.message)
+      // res.status(error.status || 500).end(error.message)
     }
   },
 });
