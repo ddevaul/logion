@@ -6,7 +6,7 @@ import type { SuggestionTest } from "models/suggestion-test";
 import { callExternalApi } from "../services/callExternalApi";
 import { WordIndex } from "models/word-index";
 
-const apiServerUrl = process.env.API_SERVER_URL as string;
+const apiServerUrl = process.env.API_SERVER_URL;
 
 interface RequestBody {
   words: Array<WordIndex>

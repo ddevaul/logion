@@ -5,7 +5,7 @@ import { type AppError } from "models/app-error";
 import { callExternalApi } from "../services/callExternalApi";
 import type { CommentModel } from "models/comment";
 
-const apiServerUrl = process.env.API_SERVER_URL as string;
+const apiServerUrl = process.env.API_SERVER_URL;
 
 interface RequestBody {
   suggestion_id: number

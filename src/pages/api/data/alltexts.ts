@@ -5,7 +5,7 @@ import { type AppError } from "models/app-error";
 import type { Text } from "models/text";
 import { callExternalApi } from "../services/callExternalApi";
 
-const apiServerUrl = process.env.API_SERVER_URL as string;
+const apiServerUrl = process.env.API_SERVER_URL;
 
 interface RequestBody {
   author_id: number;
