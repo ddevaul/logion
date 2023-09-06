@@ -61,8 +61,8 @@ const Comments = ( props: AppProps) => {
           <div>No Comments To Display</div>
           <textarea value={newComment} placeholder="Type Comment Here" onChange={updateComment}></textarea>
           <button onClick={() => {
-            void saveComment()
-            setReloadComments(!reloadComments)
+            void saveComment().then(() => setReloadComments(!reloadComments))
+            
           }}>Submit Comment</button>
       </div>
     )
@@ -84,8 +84,7 @@ const Comments = ( props: AppProps) => {
       </div>
       <textarea value={newComment} placeholder="Type Comment Here" onChange={updateComment}></textarea>
           <button onClick={() => {
-            void saveComment()
-            setReloadComments(!reloadComments)
+            void saveComment().then(() => setReloadComments(!reloadComments))
           }}>Submit Comment</button>
 
       {/* <div>{props.suggestions.map((s, i) => {
