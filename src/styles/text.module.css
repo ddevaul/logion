@@ -1,0 +1,22 @@
+.textContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.wordDiv {
+  display: inline-block;
+  margin: 2px;
+  /* border: 1px solid red; */
+}
+
+.textWithSuggestionsPanelContainer {
+  display: grid;
+  grid-template-columns: 60vw 1fr;
+}
+
+.textAndTitleContainer {
+  max-width: 60vw;
+}

@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Header from "../../components/header"
 import styles from "../styles/Home.module.css"
+// import { Auth0Features } from "components/auth0-features";
+import { NavBar } from "components/navigation/nav-bar";
 
 export default function Home() {
   return (
@@ -15,6 +17,7 @@ export default function Home() {
         <div className="flex" style={{"margin": "10px"}}>
             Logion is a project based out of Princeton University.
         </div>
+        {/* <Auth0Features /> */}
       </main>
     </>
   );

@@ -1,10 +1,14 @@
 
-import { handleAuth, handleLogin } from '@auth0/nextjs-auth0';
+import { handleAuth, handleCallback, handleLogin } from '@auth0/nextjs-auth0';
 import { NextRequest } from 'next/server';
-// export default handleAuth();
+import { getAccessToken } from "@auth0/nextjs-auth0";
+import type { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from 'axios';
+
+const apiServerUrl = process.env.API_SERVER_URL as string;
 
 export default handleAuth({
-  onError(req, res, error) {
+  onError(req, res, error){
     console.log(error)
     // errorLogger(error);
     res.writeHead(302, {
@@ -12,16 +16,42 @@ export default handleAuth({
     });
     res.end();
   },
+  // async login(req, res) { ** might be beter
   login: async (req, res) => {
     try {
       await handleLogin(req, res, {
-        authorizationParams: { prompt: 'login' },
+        authorizationParams: { 
+          prompt: 'login',
+          audience: `${process.env.AUTH0_AUDIENCE}`, // or AUTH0_AUDIENCE
+        
+        },
         returnTo: '/',
       });
+
     } catch (error) {
       console.error(error);
     }
-  }
+  },
+  callback: async (req, res) => {
+    try {
+      await handleCallback(req, res)
+      console.log("does this work?")
+      const { accessToken } = await getAccessToken(req, res);
+      console.log(accessToken)
+      const config: AxiosRequestConfig = {
+        url: `${apiServerUrl}/check_user`,
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        }
+      };
+      await axios(config);
+    } catch (error) {
+      console.log(error)
+      res.status(error.status || 500).end(error.message)
+    }
+  },
 });
 
 // import NextAuth, { NextAuthOptions } from "next-auth"
