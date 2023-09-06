@@ -13,7 +13,7 @@ type AppProps = {
 
 // Easiest way to declare a Function Component; return type is inferred.
 const ViewSuggestionPanel = ( props: AppProps) => {
-  const [focusSuggestion, setFocusSuggestion] = useState<SuggestionModel>();
+  const [focusSuggestion, setFocusSuggestion] = useState<SuggestionModel | null>();
 
   if (focusSuggestion) {
     return (

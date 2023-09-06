@@ -1,9 +1,7 @@
-import { type NextPage } from "next";
 import React from "react";
 import { useText } from "../api/services/use-text";
 import { useRouter } from 'next/router';
-import type TextWithSuggestions from "models/text-with-suggestions";
-import { getAccessToken, withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import Head from "next/head";
 import Header from "components/header";
 import styles from "../../styles/text.module.css"
@@ -18,7 +16,6 @@ import MakeSuggestionPanel from "components/make-suggestion-panel";
 import { type AxiosResponse, type AxiosRequestConfig } from "axios";
 import axios from "axios";
 import PaginationFooter from "components/navigation/pagination-footer";
-import { SyncLoader } from "react-spinners";
 
 
 export default function SingleText() {
@@ -51,11 +48,11 @@ export default function SingleText() {
         chunk: chunk,
       }
     };
-    const response: AxiosResponse = await axios(config);
+    const response: AxiosResponse<string> = await axios(config);
     const { data } = response;
     // console.log(data)
     setLoading(false);
-    return data as string;
+    return data;
     // useSuggestion({
     //   url: `/api/data/get_suggestion`,
     //   method: "GET",
@@ -89,7 +86,7 @@ export default function SingleText() {
         suggestion: suggestion
       }
     };
-    const response: AxiosResponse = await axios(config);
+    const response: AxiosResponse<string> = await axios(config);
     const { data } = response;
     window.alert('Suggestion Saved');
     setMaskedWords([]);

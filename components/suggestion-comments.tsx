@@ -1,16 +1,14 @@
-import styles from "./Suggestion.module.css";
 import React, { useState } from "react";
 import { type SuggestionModel } from "models/suggestion-model";
-import { type CommentModel } from "models/comment";
 import { useComment } from "~/pages/api/services/use-comments";
-import type { AxiosRequestConfig, AxiosResponse } from "axios";
+import type { AxiosRequestConfig } from "axios";
 import axios from "axios";
 
 
 // Declaring type of props - see "Typing Component Props" for more examples
 type AppProps = {
   suggestion: SuggestionModel,
-  setFocusSuggestion: (s: SuggestionModel) => void;
+  setFocusSuggestion: (s: SuggestionModel | null) => void;
   // suggestions: Array<SuggestionModel>;
   // setSuggestions: (suggestions: Array<SuggestionModel>) => void;
 }; 
@@ -20,7 +18,7 @@ const Comments = ( props: AppProps) => {
   const [newComment, setNewComment] = useState('');
   const [reloadComments, setReloadComments] = useState<boolean>(false);
 
-  const updateComment = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const updateComment = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewComment(event.target.value)
   }
 
@@ -51,8 +49,7 @@ const Comments = ( props: AppProps) => {
         comment: newComment 
       }
     };
-    const response: AxiosResponse = await axios(config);
-    const { data } = response;
+    await axios(config);
     setNewComment('');
   }
 
@@ -63,8 +60,8 @@ const Comments = ( props: AppProps) => {
           <button onClick={() => props.setFocusSuggestion(null)}>back</button>
           <div>No Comments To Display</div>
           <textarea value={newComment} placeholder="Type Comment Here" onChange={updateComment}></textarea>
-          <button onClick={async () => {
-            await saveComment()
+          <button onClick={() => {
+            void saveComment()
             setReloadComments(!reloadComments)
           }}>Submit Comment</button>
       </div>
@@ -86,8 +83,8 @@ const Comments = ( props: AppProps) => {
       })}
       </div>
       <textarea value={newComment} placeholder="Type Comment Here" onChange={updateComment}></textarea>
-          <button onClick={async () => {
-            await saveComment();
+          <button onClick={() => {
+            void saveComment()
             setReloadComments(!reloadComments)
           }}>Submit Comment</button>
 
