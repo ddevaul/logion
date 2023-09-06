@@ -3,7 +3,6 @@ import { type AxiosRequestConfig } from "axios";
 import { type NextApiRequest, type NextApiResponse } from "next";
 import { type AppError } from "models/app-error";
 import { callExternalApi } from "../services/callExternalApi";
-import type { SuggestionModel } from "models/suggestion-model";
 import type { CommentModel } from "models/comment";
 
 const apiServerUrl = process.env.API_SERVER_URL;

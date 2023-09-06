@@ -2,7 +2,6 @@ import Head from "next/head";
 import Header from "../../components/header"
 import styles from "../styles/Home.module.css"
 // import { Auth0Features } from "components/auth0-features";
-import { NavBar } from "components/navigation/nav-bar";
 
 export default function Home() {
   return (

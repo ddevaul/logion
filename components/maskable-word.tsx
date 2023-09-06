@@ -1,6 +1,5 @@
 import styles from "./maskable-word.module.css";
 import React from "react";
-import { type SuggestionModel } from "models/suggestion-model";
 import { type WordIndex } from "models/word-index";
 import { useState } from "react";
 

@@ -1,11 +1,9 @@
 
-import  { HandlerError, handleAuth, handleCallback, handleLogin, AppRouteHandlerFnContext, AccessTokenRequest } from '@auth0/nextjs-auth0';
-import type { NextRequest, NextResponse } from 'next/server';
+import  { handleAuth, handleCallback, handleLogin } from '@auth0/nextjs-auth0';
 import { getAccessToken } from "@auth0/nextjs-auth0";
-import type { AxiosRequestConfig, AxiosResponse } from "axios";
+import type { AxiosRequestConfig } from "axios";
 import axios from 'axios';
 import type { NextApiResponse, NextApiRequest } from 'next';
-import type { IncomingMessage, ServerResponse } from 'http';
 
 
 const apiServerUrl = process.env.API_SERVER_URL;

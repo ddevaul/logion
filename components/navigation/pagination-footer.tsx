@@ -1,6 +1,4 @@
-import styles from "./Suggestion.module.css";
 import React from "react";
-import { type SuggestionModel } from "models/suggestion-model";
 
 // Declaring type of props - see "Typing Component Props" for more examples
 type AppProps = {

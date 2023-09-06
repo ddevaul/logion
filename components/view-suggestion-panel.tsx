@@ -1,4 +1,3 @@
-import styles from "./Suggestion.module.css";
 import React from "react";
 import { type SuggestionModel } from "models/suggestion-model";
 import Comments from "./suggestion-comments";

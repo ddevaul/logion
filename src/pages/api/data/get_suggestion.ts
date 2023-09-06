@@ -4,7 +4,7 @@ import { type NextApiRequest, type NextApiResponse } from "next";
 import { type AppError } from "models/app-error";
 import type { SuggestionTest } from "models/suggestion-test";
 import { callExternalApi } from "../services/callExternalApi";
-import { WordIndex } from "models/word-index";
+import { type WordIndex } from "models/word-index";
 
 const apiServerUrl = process.env.API_SERVER_URL;
 
