@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import axios, { type AxiosError, type AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
@@ -23,7 +24,7 @@ export const useComment = (config: AxiosRequestConfig, change: boolean) => {
     }
 
     if (error) {
-      console.log(`"useComment" ${error}`)
+      // console.log(`"useComment" ${error}`)
       // setText(
       //   error.response && error.response.data
       //     ? JSON.stringify(error.response.data, null, 2)

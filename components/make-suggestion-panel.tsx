@@ -51,7 +51,7 @@ const MakeSuggestionPanel = ( props: AppProps) => {
       </div>
       <div>{suggestion}</div>
       {/* <textarea></textarea> */}
-      <button onClick={() => props.saveSuggestion(suggestion)}>Submit Suggestion / and maybe a comment later on</button>
+      <button onClick={() => void props.saveSuggestion(suggestion)}>Submit Suggestion / and maybe a comment later on</button>
     </div>
     );
   }
@@ -65,7 +65,7 @@ const MakeSuggestionPanel = ( props: AppProps) => {
         )
       })}
       </div>
-      <button onClick={() => askForSuggestion()}>Ask For Suggestion</button>
+      <button onClick={() => void askForSuggestion()}>Ask For Suggestion</button>
     </div>
   );
 };

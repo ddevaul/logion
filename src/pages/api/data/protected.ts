@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { getAccessToken, withApiAuthRequired } from "@auth0/nextjs-auth0";
 import { type AxiosRequestConfig } from "axios";
 import { type NextApiRequest, type NextApiResponse } from "next";
@@ -17,7 +18,7 @@ const getProtectedMessage = async (
     if (!accessToken) return res.status(500).json({message: "No Access Token"});
 
     const config: AxiosRequestConfig = {
-      url: `${apiServerUrl}/authors`,
+      url: `${apiServerUrl as string}/authors`,
       method: "GET",
       headers: {
         "content-type": "application/json",

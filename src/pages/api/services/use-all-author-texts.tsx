@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import axios, { type AxiosError, type AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
