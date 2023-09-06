@@ -26,8 +26,8 @@ const MaskableWord = ( props: AppProps) => {
       setMasked(true);
       return;
     }  
-    const lastWord : WordIndex = props.maskedWords[props.maskedWords.length - 1] as WordIndex;
-    const firstWord : WordIndex = props.maskedWords[0] as WordIndex;
+    const lastWord : WordIndex = props.maskedWords[props.maskedWords.length - 1];
+    const firstWord : WordIndex = props.maskedWords[0];
     if (props.index === (lastWord.index + 1)) {
       const tempMaskedWords: Array<WordIndex> = props.maskedWords;
       tempMaskedWords.push(tempMaskedWord);
@@ -46,8 +46,8 @@ const MaskableWord = ( props: AppProps) => {
   } 
 
   const unMaskWord = () => {
-    const lastWord : WordIndex = props.maskedWords[props.maskedWords.length - 1] as WordIndex;
-    const firstWord : WordIndex = props.maskedWords[0] as WordIndex;
+    const lastWord : WordIndex = props.maskedWords[props.maskedWords.length - 1];
+    const firstWord : WordIndex = props.maskedWords[0];
 
     if (lastWord.index === props.index) {
       const tempMaskedWords = props.maskedWords;
