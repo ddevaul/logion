@@ -1,14 +1,15 @@
 
-import { handleAuth, handleCallback, handleLogin } from '@auth0/nextjs-auth0';
-import { NextRequest } from 'next/server';
+import { type HandlerError, handleAuth, handleCallback, handleLogin } from '@auth0/nextjs-auth0';
+import { NextRequest, NextResponse } from 'next/server';
 import { getAccessToken } from "@auth0/nextjs-auth0";
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
 import axios from 'axios';
+import { type NextApiRequest } from 'next';
 
 const apiServerUrl = process.env.API_SERVER_URL as string;
 
 export default handleAuth({
-  onError(req, res, error){
+  onError (req, res, error){
     console.log(error)
     // errorLogger(error);
     res.writeHead(302, {
@@ -17,7 +18,7 @@ export default handleAuth({
     res.end();
   },
   // async login(req, res) { ** might be beter
-  login: async (req, res) => {
+  login: async (req: NextRequest, res: NextResponse) => {
     try {
       await handleLogin(req, res, {
         authorizationParams: { 
