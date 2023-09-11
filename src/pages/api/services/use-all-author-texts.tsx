@@ -33,6 +33,7 @@ export const useAllAuthorTexts = (config: AxiosRequestConfig) => {
     // }
 
     if (data) {
+      console.log(data)
       setText(data);
     }
   }, [data, error, isApiResponseLoading]);

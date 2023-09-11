@@ -2,7 +2,8 @@ import React from "react";
 import { type SuggestionModel } from "models/suggestion-model";
 import Comments from "./suggestion-comments";
 import { useState } from "react";
-
+import { CustomButton } from "./buttons/custom-button";
+import styles from "./ViewSuggestionPanel.module.css"
 
 // Declaring type of props - see "Typing Component Props" for more examples
 type AppProps = {
@@ -21,18 +22,19 @@ const ViewSuggestionPanel = ( props: AppProps) => {
   }
   return (
     <div>
+      <CustomButton onClick={() => props.setSuggestions([])} text='Back'></CustomButton>
       <div>{props.suggestions.map((s, i) => {
         return (
-          <div key={i}>
-            <div>{s.submitter.email}</div>
+          <div key={i} className={styles.suggestionContainer}>
             <div>Original Text: {s.original_text}</div>
-            <div>{"Logion's Suggestions"}{s.suggested_text}</div>
-            <button onClick={() => setFocusSuggestion(s)}>View Comments</button>
+            <div>Submitted by: {s.submitter.email}</div>
+            <div>{`Logion's Suggestion "${s.suggested_text}"`}</div>
+            <div>Probability: {s.probability}</div>
+            <CustomButton onClick={() => setFocusSuggestion(s)} text='View Comments'></CustomButton>
           </div>
         );
       })}
       </div>
-      <button onClick={() => props.setSuggestions([])}>exit</button>
     </div>
   );
 };

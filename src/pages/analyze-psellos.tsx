@@ -25,8 +25,10 @@ export default function AnalyzePsellos() {
       </Head>
       <main className={styles.main}>
         <Header></Header>
-        <div>Texts:</div>
-        {texts && texts.map(t => <Link href={`/psellos/${t.id}`} key={t.title}>{t.title}</Link>)}
+        <div className={styles.textsContainer}>
+          <div className={styles.title}>Texts:</div>
+          {texts && texts.map(t => <Link className={styles.link} href={`/psellos/${t.id}`} key={t.title}>{t.title}</Link>)}
+        </div>
       </main>
     </>
   );

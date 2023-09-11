@@ -1,4 +1,6 @@
 import React from "react";
+import { PageButton } from "components/buttons/page-button";
+import styles from "../componentscss/PageinationFooter.module.css"
 
 // Declaring type of props - see "Typing Component Props" for more examples
 type AppProps = {
@@ -9,36 +11,20 @@ type AppProps = {
 
 // Easiest way to declare a Function Component; return type is inferred.
 const PaginationFooter = ( props: AppProps) => {
-  const next = (): void => {
-    props.setChunk(props.chunk + 1);
-  }
 
-  const back = (): void => {
-    props.setChunk(props.chunk - 1);
-  }
-
-  if ( props.chunk > 0 && props.chunk < props.maxChunk) {
-    return (
-      <div>
-        <button onClick={() => back()}>Back</button>
-        <button onClick={() => next()}>Next</button>
-      </div>
-    );
-  } else if (props.chunk > 0) {
-    return (
-      <div>
-        <button onClick={() => back()}>Back</button>
-      </div>
-    );
-  }
-  
-  else if (props.chunk < props.maxChunk) {
-    return (
-      <div>
-        <button onClick={() => next()}>Next</button>
-      </div>
-    );
-  }
+  return (
+    <div className={styles.buttonContainer}>
+      {props.chunk - 1 >= 0 && <PageButton selected={false} onClick={() => props.setChunk(props.chunk - 1)} text='Back'></PageButton>}
+      {props.chunk - 3 >= 0 && <PageButton selected={false} onClick={() => props.setChunk(props.chunk - 3)} text={`${props.chunk-2}`}></PageButton>}
+      {props.chunk - 2 >= 0 && <PageButton selected={false} onClick={() => props.setChunk(props.chunk - 2)} text={`${props.chunk-1}`}></PageButton>}
+      {props.chunk - 1 >= 0 && <PageButton selected={false} onClick={() => props.setChunk(props.chunk - 1)} text={`${props.chunk}`}></PageButton>}
+      <PageButton selected={true} onClick={() => console.log()} text={`${props.chunk + 1}`}></PageButton>
+      {props.chunk + 1 <= props.maxChunk && <PageButton selected={false} onClick={() => props.setChunk(props.chunk + 1)} text={`${props.chunk + 2}`}></PageButton>}
+      {props.chunk + 2 <= props.maxChunk && <PageButton selected={false} onClick={() => props.setChunk(props.chunk + 2)} text={`${props.chunk + 3}`}></PageButton>}
+      {props.chunk + 3 <= props.maxChunk && <PageButton selected={false} onClick={() => props.setChunk(props.chunk + 3)} text={`${props.chunk + 4}`}></PageButton>}
+      {props.chunk + 1 <= props.maxChunk && <PageButton selected={false} onClick={() => props.setChunk(props.chunk + 1)} text='Next'></PageButton>}
+    </div>
+  );
 };
 
 

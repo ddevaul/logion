@@ -1,3 +1,18 @@
+.textsContainer {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: x-large;
+}
+
+.link {
+  margin: 5px;
+  font-size: larger;
+}
+
 .button_analyze {
   appearance: button;
   backface-visibility: hidden;
@@ -78,3 +93,5 @@
   text-align: right;
   margin-top: 5px;
 }
+
+

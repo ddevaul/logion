@@ -43,8 +43,9 @@ const getText = async (
 
     res
       .status(status || 500)
-      .json(error || { message: "Unable to retrieve message" });
+      .json(error );
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };

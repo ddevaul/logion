@@ -15,8 +15,26 @@
 .textWithSuggestionsPanelContainer {
   display: grid;
   grid-template-columns: 60vw 1fr;
+  margin: 20px;
 }
 
 .textAndTitleContainer {
   max-width: 60vw;
+}
+
+
+.screenContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+}
+
+.screenBackButtonContainer {
+  max-width: 50px;
+}
+
+
+.workTitle {
+  font-size: x-large;
+  margin: 20px;
 }

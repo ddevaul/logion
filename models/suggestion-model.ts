@@ -12,4 +12,5 @@ export interface SuggestionModel {
       end_word: null | string;
       id: number;
       submitter: User;
+      probability: number;
 }

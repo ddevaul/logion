@@ -7,8 +7,6 @@ export const NavBarTabs: React.FC = () => {
   // console.log(user)
   return (
     <div className="nav-bar__tabs">
-      <NavBarTab path="/profile" label="Profile" />
-      <NavBarTab path="/public" label="Public" />
       {user && (
         <>
           <NavBarTab path="/protected" label="Protected" />

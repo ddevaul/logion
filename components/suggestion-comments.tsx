@@ -3,6 +3,11 @@ import { type SuggestionModel } from "models/suggestion-model";
 import { useComment } from "~/pages/api/services/use-comments";
 import type { AxiosRequestConfig } from "axios";
 import axios from "axios";
+import { useUser } from '@auth0/nextjs-auth0/client';
+import { type CommentModel } from "models/comment"; 
+import { CustomButton } from "./buttons/custom-button";
+import { PageButton } from "./buttons/page-button";
+import styles from "./SuggestionComments.module.css"
 
 
 // Declaring type of props - see "Typing Component Props" for more examples
@@ -15,6 +20,7 @@ type AppProps = {
 
 // Easiest way to declare a Function Component; return type is inferred.
 const Comments = ( props: AppProps) => {
+  const { user } = useUser();
   const [newComment, setNewComment] = useState('');
   const [reloadComments, setReloadComments] = useState<boolean>(false);
 
@@ -54,47 +60,67 @@ const Comments = ( props: AppProps) => {
   }
 
 
+  const deleteComment = async (comment: CommentModel): Promise<void> => {
+    const config: AxiosRequestConfig = {
+      url: `/api/data/comment_delete`,
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      data: {
+        suggestion_id: props.suggestion.id,
+        comment: comment 
+      }
+    };
+    await axios(config);
+    setNewComment('');
+  }
+ 
+
   if (comments?.length === 0) {
     return (
       <div>
-          <button onClick={() => props.setFocusSuggestion(null)}>back</button>
-          <div>No Comments To Display</div>
-          <textarea value={newComment} placeholder="Type Comment Here" onChange={updateComment}></textarea>
-          <button onClick={() => {
-            void saveComment().then(() => setReloadComments(!reloadComments))
-            
-          }}>Submit Comment</button>
+          <CustomButton onClick={() => props.setFocusSuggestion(null)} text='Back'></CustomButton>
+          <div className={styles.noComments}>No Comments To Display</div>
+          <div className={styles.newCommentContainer}>
+            <textarea value={newComment} placeholder="Type Comment Here" onChange={updateComment}></textarea>
+            <PageButton selected={false} onClick={() => {
+              void saveComment().then(() => setReloadComments(!reloadComments))
+            }} text='Submit Comment'></PageButton>
+          </div>
       </div>
     )
   }
 
   return (
     <div>
-        <button onClick={() => props.setFocusSuggestion(null)}>back</button>
-      <div>{props.suggestion.id}</div>
+      <CustomButton onClick={() => props.setFocusSuggestion(null)} text='Back'></CustomButton>
+      <div className={styles.suggestionSectionContainer}>
+        <div className={styles.suggestionTitle}>Suggestion:</div>
+        <div className={styles.suggestionContainer}> 
+          <div>Original Text: {props.suggestion.original_text}</div>
+          <div>{`Logion's Suggestion "${props.suggestion.suggested_text}"`}</div>
+          <div>Probability: {props.suggestion.probability}</div>
+        </div>
+      </div>
       <div>
-      {comments && comments.map((c, i) => {
-        return (
-          <div key={i}>
-            <div>{comments && c.body}</div>
-            <div>{comments && c.commenter.email}</div>
-          </div>
-        )
-      })}
+        <div className={styles.commentsTitle}>Comments:</div>
+        {comments && comments.map((c, i) => {
+          return (
+            <div key={i} className={styles.commentContainer}>
+              <div className={styles.commentBody}>{comments && c.body}</div>
+              <div className={styles.commentUser}>{comments && c.commenter.email}</div>
+              {c.commenter.email === user.email && <CustomButton onClick={() => void deleteComment(c).then(() => setReloadComments(!reloadComments))} text='Delete'></CustomButton>}
+            </div>
+          )
+        })}
       </div>
-      <textarea value={newComment} placeholder="Type Comment Here" onChange={updateComment}></textarea>
-          <button onClick={() => {
-            void saveComment().then(() => setReloadComments(!reloadComments))
-          }}>Submit Comment</button>
-
-      {/* <div>{props.suggestions.map((s, i) => {
-        return (
-          <div key={i}>{s.suggested_text}</div>
-        );
-      })}
+      <div className={styles.newCommentContainer}>
+        <textarea value={newComment} placeholder="Type Comment Here" onChange={updateComment}></textarea>
+        <PageButton selected={false} onClick={() => {
+          void saveComment().then(() => setReloadComments(!reloadComments))
+        }} text='Submit Comment'></PageButton>
       </div>
-      {/* <div>{props.suggestions[0]?.start_index}</div> */}
-      {/* <button onClick={() => props.setSuggestions([])}>exit</button> */}
     </div>
   );
 };
