@@ -24,7 +24,7 @@ const search = async (
     const body = req.body as RequestBody;
 
     const config: AxiosRequestConfig = {
-      url: `${apiServerUrl}/search`,
+      url: `http://ec2-100-27-5-254.compute-1.amazonaws.com:8000/api/search`,
       method: "POST",
       headers: {
         "content-type": "application/json",

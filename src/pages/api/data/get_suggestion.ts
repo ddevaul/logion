@@ -24,7 +24,7 @@ const getSuggestion = async (
     const body = req.body as RequestBody;
 
     const config: AxiosRequestConfig = {
-      url: `${apiServerUrl}/suggestions_get`,
+      url: `http://ec2-100-27-5-254.compute-1.amazonaws.com:8000/api/suggestions_get`,
       method: "POST",
       headers: {
         "content-type": "application/json",

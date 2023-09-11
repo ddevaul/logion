@@ -26,7 +26,7 @@ const getText = async (
     const id: number = body.id;
     const chunk: number = body.chunk;
     const config: AxiosRequestConfig = {
-      url: `${apiServerUrl}/text/${id}/${chunk}`,
+      url: `http://ec2-100-27-5-254.compute-1.amazonaws.com:8000/api/text/${id}/${chunk}`,
       method: "GET",
       headers: {
         "content-type": "application/json",
