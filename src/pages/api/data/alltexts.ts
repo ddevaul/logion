@@ -24,7 +24,7 @@ const getText = async (
 
     const author_id: number = body.author_id;
     const config: AxiosRequestConfig = {
-      url: `${apiServerUrl}/all_texts/${author_id}`,
+      url: `http://ec2-100-27-5-254.compute-1.amazonaws.com:8000/api/all_texts/${author_id}`,
       method: "GET",
       headers: {
         "content-type": "application/json",
