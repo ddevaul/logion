@@ -25,11 +25,6 @@ const MakeSuggestionPanel = ( props: AppProps) => {
     await props.getSuggestion();
   }
 
-  // const clear = () => {
-  //   setSuggestions(null);
-  //   props.setMaskedWords([]);
-  // }
-
   if (props.loading) {
     return (
       <div>
